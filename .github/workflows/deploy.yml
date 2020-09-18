@@ -15,7 +15,7 @@ jobs:
         run: |
           REPOSITORY_URL=${{ secrets.DOCKERHUB_USERNAME }}/aws-cli-with-terraform
           docker build --tag $REPOSITORY_URL:latest .
-          IMAGE_TAG=$(echo ${{ github.ref }} | sed 's/^refs\/tags\//g')
+          IMAGE_TAG=$(echo ${{ github.ref }} | sed 's/^refs\/tags\///g')
           docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG
           docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
           docker push $REPOSITORY_URL:latest
